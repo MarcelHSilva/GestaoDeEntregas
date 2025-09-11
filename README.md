@@ -1,61 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestão de Entregas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema completo para gestão de entregas de moto, desenvolvido em Laravel.
 
-## About Laravel
+## 🚀 Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 📦 Gestão de Entregas
+- Cadastro de entregas diárias
+- Controle de quilometragem (inicial e final)
+- Registro de quantidade de entregas e valor por entrega
+- Cálculo automático de consumo de combustível
+- Controle de custos e lucros
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔧 Gestão de Manutenções
+- Cadastro de manutenções realizadas
+- Controle de custos de manutenção
+- Registro de quilometragem da manutenção
+- Integração com detalhes de entregas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📊 Relatórios
+- Relatórios semanais
+- Relatórios mensais
+- Relatórios personalizados por período
+- Análise de consumo e custos
+- Cálculo de margem de lucro
 
-## Learning Laravel
+### 💡 Recursos Especiais
+- **Integração Entregas x Manutenções**: Visualização de manutenções realizadas no mesmo dia da entrega
+- **Cálculo de Lucro Real**: Desconto automático dos custos de manutenção do lucro líquido
+- **Interface Responsiva**: Design moderno e adaptável
+- **Paginação Customizada**: Navegação otimizada entre registros
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tecnologias Utilizadas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Laravel 11** - Framework PHP
+- **SQLite** - Banco de dados
+- **Bootstrap 5** - Framework CSS
+- **Bootstrap Icons** - Ícones
+- **Carbon** - Manipulação de datas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📋 Pré-requisitos
 
-## Laravel Sponsors
+- PHP 8.2 ou superior
+- Composer
+- Node.js (opcional, para assets)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Instalação
 
-### Premium Partners
+1. Clone o repositório:
+```bash
+git clone https://github.com/MarcelHSilva/GestaoDeEntregas.git
+cd GestaoDeEntregas
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. Instale as dependências:
+```bash
+composer install
+```
 
-## Contributing
+3. Configure o ambiente:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Execute as migrações:
+```bash
+php artisan migrate
+```
 
-## Code of Conduct
+5. Inicie o servidor:
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. Acesse: `http://localhost:8000`
 
-## Security Vulnerabilities
+## 📱 Como Usar
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Cadastro de Entregas
+1. Acesse "Entregas" no menu
+2. Clique em "Nova Entrega"
+3. Preencha os dados: data, KM inicial/final, quantidade de entregas, etc.
+4. O sistema calculará automaticamente o consumo e lucros
 
-## License
+### Cadastro de Manutenções
+1. Acesse "Manutenções" no menu
+2. Clique em "Nova Manutenção"
+3. Registre a data, descrição, custo e quilometragem
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Visualização Integrada
+- Ao visualizar os detalhes de uma entrega, as manutenções do mesmo dia são exibidas automaticamente
+- O lucro real é calculado descontando os custos de manutenção
+
+### Relatórios
+1. Acesse "Relatórios" no menu
+2. Escolha entre semanal, mensal ou personalizado
+3. Visualize gráficos e análises detalhadas
+
+## 🎯 Principais Recursos
+
+- ✅ **Gestão Completa**: Entregas, manutenções e relatórios em um só lugar
+- ✅ **Cálculos Automáticos**: Consumo, custos e lucros calculados automaticamente
+- ✅ **Interface Intuitiva**: Design limpo e fácil de usar
+- ✅ **Relatórios Detalhados**: Análises completas de performance
+- ✅ **Integração Inteligente**: Manutenções vinculadas às entregas por data
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
+
+## 👨‍💻 Desenvolvedor
+
+Desenvolvido por [Marcel Silva](https://github.com/MarcelHSilva)
+
+---
+
+⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!
