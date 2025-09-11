@@ -178,7 +178,7 @@
                         @foreach($maintenances as $maintenance)
                         <div class="border-bottom pb-2 mb-2">
                             <div class="d-flex justify-content-between">
-                                <small class="text-muted">{{ \Carbon\Carbon::parse($maintenance->date)->format('d/m') }}</small>
+                                <small class="text-muted">{{ $maintenance->date->format('d/m') }}</small>
                                 <strong class="text-danger">R$ {{ number_format($maintenance->cost, 2, ',', '.') }}</strong>
                             </div>
                             <p class="mb-0 small">{{ Str::limit($maintenance->description, 35) }}</p>

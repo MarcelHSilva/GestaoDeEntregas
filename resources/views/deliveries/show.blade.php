@@ -150,7 +150,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <strong>Data:</strong><br>
-                                    <span class="text-muted">{{ \Carbon\Carbon::parse($maintenance->date)->format('d/m/Y') }}</span>
+                                    <span class="text-muted">{{ $maintenance->date->format('d/m/Y') }}</span>
                                 </div>
                                 <div class="col-md-3">
                                     <strong>KM:</strong><br>

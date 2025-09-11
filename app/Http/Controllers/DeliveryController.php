@@ -75,7 +75,7 @@ class DeliveryController extends Controller
         }
         
         // Calcular net (gross - fuel_total - soma de manutenções do mesmo dia)
-        $maintenanceCosts = Maintenance::whereDate('date', '=', $data['date'])->sum('cost');
+        $maintenanceCosts = Maintenance::whereDate('date', $data['date'])->sum('cost');
         $fuelCost = $data['fuel_total'] ?? 0;
         $data['net'] = $data['gross'] - $fuelCost - $maintenanceCosts;
 
@@ -138,7 +138,7 @@ class DeliveryController extends Controller
         }
         
         // Calcular net (gross - fuel_total - soma de manutenções do mesmo dia)
-        $maintenanceCosts = Maintenance::whereDate('date', '=', $data['date'])->sum('cost');
+        $maintenanceCosts = Maintenance::whereDate('date', $data['date'])->sum('cost');
         $fuelCost = $data['fuel_total'] ?? 0;
         $data['net'] = $data['gross'] - $fuelCost - $maintenanceCosts;
 

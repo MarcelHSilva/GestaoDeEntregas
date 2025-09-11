@@ -27,7 +27,7 @@
                     <tbody>
                         @foreach($maintenances as $maintenance)
                         <tr>
-                            <td>{{ \Carbon\Carbon::parse($maintenance->date)->format('d/m/Y') }}</td>
+                            <td>{{ $maintenance->date->format('d/m/Y') }}</td>
                             <td>{{ Str::limit($maintenance->description, 50) }}</td>
                             <td>R$ {{ number_format($maintenance->cost, 2, ',', '.') }}</td>
                             <td>{{ $maintenance->km ? number_format($maintenance->km, 0, ',', '.') : '-' }}</td>

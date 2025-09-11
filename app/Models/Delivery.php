@@ -31,7 +31,9 @@ class Delivery extends Model
         'price_per_liter' => 'decimal:2',
         'fuel_total' => 'decimal:2',
         'gross' => 'decimal:2',
-        'net' => 'decimal:2'
+        'net' => 'decimal:2',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
 
     /**
@@ -39,6 +41,6 @@ class Delivery extends Model
      */
     public function getMaintenancesAttribute()
     {
-        return Maintenance::whereDate('date', '=', $this->date)->get();
+        return Maintenance::where('date', $this->date)->get();
     }
 }
