@@ -39,6 +39,6 @@ class Delivery extends Model
      */
     public function getMaintenancesAttribute()
     {
-        return Maintenance::where('date', $this->date)->get();
+        return Maintenance::whereDate('date', '=', $this->date)->get();
     }
 }

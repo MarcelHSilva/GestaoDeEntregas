@@ -25,12 +25,12 @@ class ReportController extends Controller
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
-            return \Carbon\Carbon::parse($delivery->date)->format('Y-m-d');
+            return Carbon::parse($delivery->date)->format('Y-m-d');
         });
         
         // Agrupar manutenções por dia
         $maintenancesByDay = $maintenances->groupBy(function($maintenance) {
-            return \Carbon\Carbon::parse($maintenance->date)->format('Y-m-d');
+            return Carbon::parse($maintenance->date)->format('Y-m-d');
         });
         
         return view('reports.index', compact(
@@ -82,12 +82,12 @@ class ReportController extends Controller
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
-            return \Carbon\Carbon::parse($delivery->date)->format('Y-m-d');
+            return Carbon::parse($delivery->date)->format('Y-m-d');
         });
         
         // Agrupar manutenções por dia
         $maintenancesByDay = $maintenances->groupBy(function($maintenance) {
-            return \Carbon\Carbon::parse($maintenance->date)->format('Y-m-d');
+            return Carbon::parse($maintenance->date)->format('Y-m-d');
         });
         
         return view('reports.weekly', compact('deliveries', 'maintenances', 'startDate', 'endDate', 'totalRevenue', 'totalMaintenanceCost', 'totalFuelCost', 'totalKm', 'totalFuel', 'totalProfit', 'deliveriesByDay', 'maintenancesByDay'));
@@ -137,12 +137,12 @@ class ReportController extends Controller
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
-            return \Carbon\Carbon::parse($delivery->date)->format('Y-m-d');
+            return Carbon::parse($delivery->date)->format('Y-m-d');
         });
         
         // Agrupar manutenções por dia
         $maintenancesByDay = $maintenances->groupBy(function($maintenance) {
-            return \Carbon\Carbon::parse($maintenance->date)->format('Y-m-d');
+            return Carbon::parse($maintenance->date)->format('Y-m-d');
         });
         
         return view('reports.monthly', compact('deliveries', 'maintenances', 'startDate', 'endDate', 'totalRevenue', 'totalMaintenanceCost', 'totalFuelCost', 'totalFuel', 'totalKm', 'totalProfit', 'deliveriesByDay', 'maintenancesByDay'));
@@ -170,12 +170,12 @@ class ReportController extends Controller
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
-            return \Carbon\Carbon::parse($delivery->date)->format('Y-m-d');
+            return Carbon::parse($delivery->date)->format('Y-m-d');
         });
         
         // Agrupar manutenções por dia
         $maintenancesByDay = $maintenances->groupBy(function($maintenance) {
-            return \Carbon\Carbon::parse($maintenance->date)->format('Y-m-d');
+            return Carbon::parse($maintenance->date)->format('Y-m-d');
         });
         
         return view('reports.custom', compact('deliveries', 'maintenances', 'startDate', 'endDate', 'totalRevenue', 'totalMaintenanceCost', 'totalFuelCost', 'totalFuel', 'totalKm', 'totalProfit', 'deliveriesByDay', 'maintenancesByDay'));

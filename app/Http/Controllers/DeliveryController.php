@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Delivery;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DeliveryController extends Controller
 {
@@ -22,7 +23,7 @@ class DeliveryController extends Controller
         // Agrupar manutenções por dia
         $maintenances = Maintenance::all();
         $maintenancesByDay = $maintenances->groupBy(function($maintenance) {
-            return \Carbon\Carbon::parse($maintenance->date)->format('Y-m-d');
+            return Carbon::parse($maintenance->date)->format('Y-m-d');
         });
         
         return view('deliveries.index', compact('deliveries', 'recentDeliveries', 'maintenancesByDay'));
@@ -74,7 +75,7 @@ class DeliveryController extends Controller
         }
         
         // Calcular net (gross - fuel_total - soma de manutenções do mesmo dia)
-        $maintenanceCosts = Maintenance::whereDate('date', $data['date'])->sum('cost');
+        $maintenanceCosts = Maintenance::whereDate('date', '=', $data['date'])->sum('cost');
         $fuelCost = $data['fuel_total'] ?? 0;
         $data['net'] = $data['gross'] - $fuelCost - $maintenanceCosts;
 
@@ -137,7 +138,7 @@ class DeliveryController extends Controller
         }
         
         // Calcular net (gross - fuel_total - soma de manutenções do mesmo dia)
-        $maintenanceCosts = Maintenance::whereDate('date', $data['date'])->sum('cost');
+        $maintenanceCosts = Maintenance::whereDate('date', '=', $data['date'])->sum('cost');
         $fuelCost = $data['fuel_total'] ?? 0;
         $data['net'] = $data['gross'] - $fuelCost - $maintenanceCosts;
 

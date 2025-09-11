@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Data:</label>
-                <p class="form-control-plaintext">{{ \Carbon\Carbon::parse($maintenance->date)->format('d/m/Y') }}</p>
+                <p class="form-control-plaintext">{{ $maintenance->date->format('d/m/Y') }}</p>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">KM:</label>
@@ -48,12 +48,12 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Cadastrado em:</label>
-                <p class="form-control-plaintext text-muted">{{ \Carbon\Carbon::parse($maintenance->created_at)->format('d/m/Y H:i') }}</p>
+                <p class="form-control-plaintext text-muted">{{ $maintenance->created_at->format('d/m/Y H:i') }}</p>
             </div>
             @if($maintenance->updated_at != $maintenance->created_at)
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Última atualização:</label>
-                <p class="form-control-plaintext text-muted">{{ \Carbon\Carbon::parse($maintenance->updated_at)->format('d/m/Y H:i') }}</p>
+                <p class="form-control-plaintext text-muted">{{ $maintenance->updated_at->format('d/m/Y H:i') }}</p>
             </div>
             @endif
         </div>
