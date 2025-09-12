@@ -21,7 +21,7 @@ class ReportController extends Controller
         $totalKm = $deliveries->sum(function($delivery) {
             return $delivery->km_end - $delivery->km_start;
         });
-        $totalProfit = $totalRevenue - $totalFuelCost - $totalMaintenanceCost;
+        $totalProfit = $deliveries->sum('net');
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
@@ -78,7 +78,7 @@ class ReportController extends Controller
             return $delivery->km_end - $delivery->km_start;
         });
         $totalFuel = $deliveries->sum('liters');
-        $totalProfit = $totalRevenue - $totalMaintenanceCost - $totalFuelCost;
+        $totalProfit = $deliveries->sum('net');
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
@@ -133,7 +133,7 @@ class ReportController extends Controller
         $totalKm = $deliveries->sum(function($delivery) {
             return $delivery->km_end - $delivery->km_start;
         });
-        $totalProfit = $totalRevenue - $totalMaintenanceCost - $totalFuelCost;
+        $totalProfit = $deliveries->sum('net');
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {
@@ -166,7 +166,7 @@ class ReportController extends Controller
         $totalKm = $deliveries->sum(function($delivery) {
             return $delivery->km_end - $delivery->km_start;
         });
-        $totalProfit = $totalRevenue - $totalMaintenanceCost - $totalFuelCost;
+        $totalProfit = $deliveries->sum('net');
         
         // Agrupar entregas por dia
         $deliveriesByDay = $deliveries->groupBy(function($delivery) {

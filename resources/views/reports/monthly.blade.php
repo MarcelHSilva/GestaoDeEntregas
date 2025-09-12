@@ -33,7 +33,7 @@
         <div class="card bg-success text-white">
             <div class="card-body text-center">
                 <i class="bi bi-currency-dollar" style="font-size: 1.5rem;"></i>
-                <h4 class="mt-2">{{ number_format($totalRevenue, 0, ',', '.') }}</h4>
+                <h4 class="mt-2">R$ {{ number_format($totalRevenue, 2, ',', '.') }}</h4>
                 <p class="mb-0 small">Receita Bruta</p>
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="card bg-warning text-white">
             <div class="card-body text-center">
                 <i class="bi bi-fuel-pump" style="font-size: 1.5rem;"></i>
-                <h4 class="mt-2">{{ number_format($totalFuelCost, 0, ',', '.') }}</h4>
+                <h4 class="mt-2">R$ {{ number_format($totalFuelCost, 2, ',', '.') }}</h4>
                 <p class="mb-0 small">Combustível</p>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="card bg-danger text-white">
             <div class="card-body text-center">
                 <i class="bi bi-tools" style="font-size: 1.5rem;"></i>
-                <h4 class="mt-2">{{ number_format($totalMaintenanceCost, 0, ',', '.') }}</h4>
+                <h4 class="mt-2">R$ {{ number_format($totalMaintenanceCost, 2, ',', '.') }}</h4>
                 <p class="mb-0 small">Manutenções</p>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="card bg-info text-white">
             <div class="card-body text-center">
                 <i class="bi bi-graph-up" style="font-size: 1.5rem;"></i>
-                <h4 class="mt-2">{{ number_format($totalProfit, 0, ',', '.') }}</h4>
+                <h4 class="mt-2">R$ {{ number_format($totalProfit, 2, ',', '.') }}</h4>
                 <p class="mb-0 small">Lucro Líquido</p>
             </div>
         </div>
