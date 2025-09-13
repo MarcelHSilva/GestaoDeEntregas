@@ -1,6 +1,3 @@
-[providers]
-php = "8.2"
-
 [phases.setup]
 nixPkgs = ['php82', 'php82Packages.composer']
 
