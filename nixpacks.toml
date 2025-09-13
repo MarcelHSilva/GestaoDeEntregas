@@ -1,9 +1,14 @@
+[providers]
+php = "8.2"
+
 [phases.setup]
 nixPkgs = ['php82', 'php82Packages.composer']
 
 [phases.install]
 cmds = [
-    'composer install --no-dev --optimize-autoloader'
+    'composer install --no-dev --optimize-autoloader',
+    'touch database/database.sqlite',
+    'php artisan config:cache'
 ]
 
 [start]
