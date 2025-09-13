@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="stat-card">
         <div class="stat-icon bg-success">
             <i class="bi bi-cash-stack"></i>
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="stat-card">
         <div class="stat-icon bg-warning">
             <i class="bi bi-fuel-pump"></i>
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="stat-card">
         <div class="stat-icon bg-info">
             <i class="bi bi-graph-up"></i>
@@ -64,7 +64,7 @@
             <div class="stat-value">R$ {{ number_format($recentDeliveries->sum('net'), 2, ',', '.') }}</div>
             <div class="stat-label">Lucro (30 dias)</div>
             <div class="stat-change {{ $recentDeliveries->sum('net') > 0 ? 'positive' : 'negative' }}">
-                <i class="bi bi-arrow-{{ $recentDeliveries->sum('net') > 0 ? 'up' : 'down' }}"></i> 
+                <i class="bi bi-arrow-{{ $recentDeliveries->sum('net') > 0 ? 'up' : 'down' }}"></i>
                 {{ $recentDeliveries->sum('net') > 0 ? '+15%' : '-5%' }} este mês
             </div>
         </div>
@@ -96,7 +96,10 @@
                 </thead>
                 <tbody>
                     @foreach($deliveries as $delivery)
-                    <tr>
+                    @php
+                        $adjustedNet = $delivery->net;
+                    @endphp
+                    <tr class="{{ $adjustedNet > 0 ? 'table-success' : ($adjustedNet < 0 ? 'table-danger' : '') }}">
                         <td>
                             <div class="fw-bold">{{ $delivery->date->format('d/m/Y') }}</div>
                             <small class="text-muted">{{ $delivery->date->format('D') }}</small>
@@ -130,7 +133,7 @@
                             @php
                                 $dayKey = $delivery->date->format('Y-m-d');
                                 $dayMaintenanceCost = isset($maintenancesByDay[$dayKey]) ? $maintenancesByDay[$dayKey]->sum('cost') : 0;
-                                $deliveriesOnDay = \App\Models\Delivery::whereDate('date', $delivery->date)->count();
+                                $deliveriesOnDay = \App\Models\Delivery::whereRaw('DATE(date) = ?', [$delivery->date->format('Y-m-d')])->count();
                                 $maintenanceCostPerDelivery = $deliveriesOnDay > 0 ? $dayMaintenanceCost / $deliveriesOnDay : 0;
                             @endphp
                             @if($maintenanceCostPerDelivery > 0)
@@ -140,10 +143,6 @@
                             @endif
                         </td>
                         <td>
-                            @php
-                                // Usar o valor net já calculado e salvo no banco de dados
-                                $adjustedNet = $delivery->net;
-                            @endphp
                             <span class="fw-bold {{ $adjustedNet > 0 ? 'value-positive' : 'value-negative' }}">R$ {{ number_format($adjustedNet, 2, ',', '.') }}</span>
                         </td>
                         <td>

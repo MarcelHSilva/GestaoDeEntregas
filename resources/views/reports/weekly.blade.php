@@ -79,16 +79,16 @@
             <div class="card-body">
                 @if($deliveries->count() > 0)
                     <div class="table-responsive">
-                        <table class="table table-sm">
+                        <table class="table table-hover mb-0">
                             <thead>
                                 <tr>
-                                    <th>Data</th>
-                                    <th>Entregas</th>
-                                    <th>KM</th>
-                                    <th>Combustível</th>
-                                    <th>Bruto</th>
-                                    <th>Manutenção</th>
-                                    <th>Líquido</th>
+                                    <th><i class="bi bi-calendar3 me-1"></i>Data</th>
+                                    <th><i class="bi bi-box-seam me-1"></i>Entregas</th>
+                                    <th><i class="bi bi-speedometer me-1"></i>KM</th>
+                                    <th><i class="bi bi-fuel-pump me-1"></i>Combustível</th>
+                                    <th><i class="bi bi-cash-stack me-1"></i>Bruto</th>
+                                    <th><i class="bi bi-tools me-1"></i>Manutenção</th>
+                                    <th><i class="bi bi-graph-up me-1"></i>Líquido</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,17 +103,39 @@
                                     });
                                     $maintenanceCostForDay = isset($maintenancesByDay[$dateKey]) ? $maintenancesByDay[$dateKey]->sum('cost') : 0;
                                     $maintenanceCostPerDelivery = $deliveriesForDay->count() > 0 ? $maintenanceCostForDay / $deliveriesForDay->count() : 0;
-                                    // Usar o valor net já calculado e salvo no banco de dados
                                     $adjustedNet = $delivery->net;
                                 @endphp
-                                <tr>
-                                    <td>{{ $delivery->date->format('d/m') }}</td>
-                                    <td>{{ $delivery->delivery_count }}</td>
-                                    <td>{{ number_format($delivery->km_end - $delivery->km_start, 0, ',', '.') }}</td>
-                                    <td>R$ {{ number_format($delivery->fuel_total, 2, ',', '.') }}</td>
-                                    <td>R$ {{ number_format($delivery->gross, 2, ',', '.') }}</td>
-                                    <td>R$ {{ number_format($maintenanceCostPerDelivery, 2, ',', '.') }}</td>
-                                    <td>R$ {{ number_format($adjustedNet, 2, ',', '.') }}</td>
+                                <tr class="{{ $adjustedNet > 0 ? 'table-success' : ($adjustedNet < 0 ? 'table-danger' : '') }}">
+                                    <td>
+                                        <div class="fw-bold">{{ $delivery->date->format('d/m/Y') }}</div>
+                                        <small class="text-muted">{{ $delivery->date->format('D') }}</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary rounded-pill">{{ $delivery->delivery_count }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold">{{ number_format($delivery->km_end - $delivery->km_start, 0, ',', '.') }} km</span>
+                                    </td>
+                                    <td>
+                                        @if($delivery->fuel_total)
+                                            <span class="fw-bold value-negative">R$ {{ number_format($delivery->fuel_total, 2, ',', '.') }}</span>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold value-positive">R$ {{ number_format($delivery->gross, 2, ',', '.') }}</span>
+                                    </td>
+                                    <td>
+                                        @if($maintenanceCostPerDelivery > 0)
+                                            <span class="fw-bold value-negative">R$ {{ number_format($maintenanceCostPerDelivery, 2, ',', '.') }}</span>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold {{ $adjustedNet > 0 ? 'value-positive' : 'value-negative' }}">R$ {{ number_format($adjustedNet, 2, ',', '.') }}</span>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

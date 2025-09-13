@@ -119,16 +119,16 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-sm">
+                    <table class="table table-hover mb-0">
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Entregas</th>
-                                <th>KM</th>
-                                <th>Combustível</th>
-                                <th>Receita Bruta</th>
-                                <th>Manutenção</th>
-                                <th>Receita Líquida</th>
+                                <th><i class="bi bi-calendar3 me-1"></i>Data</th>
+                                <th><i class="bi bi-box-seam me-1"></i>Entregas</th>
+                                <th><i class="bi bi-speedometer me-1"></i>KM</th>
+                                <th><i class="bi bi-fuel-pump me-1"></i>Combustível</th>
+                                <th><i class="bi bi-cash-stack me-1"></i>Bruto</th>
+                                <th><i class="bi bi-tools me-1"></i>Manutenção</th>
+                                <th><i class="bi bi-graph-up me-1"></i>Líquido</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,14 +143,37 @@
                                 $dayMaintenanceCost = isset($maintenancesByDay[$date]) ? $maintenancesByDay[$date]->sum('cost') : 0;
                                 $adjustedNet = $dayGross - $dayFuel - $dayMaintenanceCost;
                             @endphp
-                            <tr>
-                                <td>{{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}</td>
-                                <td>{{ $dayDeliveries->sum('delivery_count') }}</td>
-                                <td>{{ number_format($dayKm, 0, ',', '.') }}</td>
-                                <td>R$ {{ number_format($dayFuel, 2, ',', '.') }}</td>
-                                <td>R$ {{ number_format($dayGross, 2, ',', '.') }}</td>
-                                <td>R$ {{ number_format($dayMaintenanceCost, 2, ',', '.') }}</td>
-                                <td>R$ {{ number_format($adjustedNet, 2, ',', '.') }}</td>
+                            <tr class="{{ $adjustedNet > 0 ? 'table-success' : ($adjustedNet < 0 ? 'table-danger' : '') }}">
+                                <td>
+                                    <div class="fw-bold">{{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}</div>
+                                    <small class="text-muted">{{ \Carbon\Carbon::parse($date)->format('D') }}</small>
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary rounded-pill">{{ $dayDeliveries->sum('delivery_count') }}</span>
+                                </td>
+                                <td>
+                                    <span class="fw-bold">{{ number_format($dayKm, 0, ',', '.') }} km</span>
+                                </td>
+                                <td>
+                                    @if($dayFuel > 0)
+                                        <span class="fw-bold value-negative">R$ {{ number_format($dayFuel, 2, ',', '.') }}</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <span class="fw-bold value-positive">R$ {{ number_format($dayGross, 2, ',', '.') }}</span>
+                                </td>
+                                <td>
+                                    @if($dayMaintenanceCost > 0)
+                                        <span class="fw-bold value-negative">R$ {{ number_format($dayMaintenanceCost, 2, ',', '.') }}</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <span class="fw-bold {{ $adjustedNet > 0 ? 'value-positive' : 'value-negative' }}">R$ {{ number_format($adjustedNet, 2, ',', '.') }}</span>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
